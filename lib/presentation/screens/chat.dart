@@ -15,12 +15,16 @@ class ChatScreen extends StatelessWidget {
         title: const Text('FlutterChat'),
         actions: [
           IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
+            onPressed: () async {
+              try {
+                await FirebaseAuth.instance.signOut();
+                // Navigate to the login screen or any other appropriate screen after logout
+              } catch (e) {
+                print('Error signing out: $e');
+                // Handle the error here, e.g., display an error message
+              }
             },
-            icon: const Icon(
-                Icons.logout
-            ),
+            icon: const Icon(Icons.logout),
           ),
         ],
       ),
